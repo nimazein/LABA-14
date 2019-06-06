@@ -9,6 +9,13 @@ namespace Task_1
     class Zoo
     {
         private List<Sections> zooo = new List<Sections>();
+        public List<Sections> Zooo
+        {
+            get
+            {
+                return zooo;
+            }
+        }
         public int Count { get { return zooo.Count; } }
 
         public void Add(Sections section)

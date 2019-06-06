@@ -14,7 +14,29 @@ namespace Task_1
         {
             Console.OutputEncoding = Encoding.UTF8;
             FillCollections();
+            Console.ReadKey();
+            Console.Clear();
 
+
+            Console.WriteLine("Запрос 1: все птицы в зоопарке");
+            Console.WriteLine();
+            ShowBirds_1();
+            Console.ReadKey();
+            Console.Clear();
+
+
+            Console.WriteLine("Запрос 2: количество млекопитающих в зоопарке");
+            Console.WriteLine();
+            CountMammals_2();
+            Console.ReadKey();
+            Console.Clear();
+
+
+            Console.WriteLine("Запрос 3: операции над множествами");
+            Console.WriteLine();
+            SetOperations_3();
+            Console.ReadKey();
+            Console.Clear();
 
             Console.ReadKey();
         }
@@ -76,6 +98,35 @@ namespace Task_1
             
             Console.Write("Введите размер: ");
             Size = Convert.ToInt32(Console.ReadLine());
+        }
+        private static void ShowBirds_1()
+        {
+            int sectionNumber = 1;
+            foreach (Sections section in zoo.Zooo)
+            {
+                var birds = from bird in section.Animals where bird.Name.Contains("Птица") select bird;
+                foreach (var s in birds) Console.WriteLine("Птица: {0} в секции {1}", s.ToString(), sectionNumber);
+                sectionNumber++;
+            }
+        }
+        private static void CountMammals_2()
+        {
+            int inSection = 0;
+            int sectionNumber = 1;
+            int inZoo = 0;
+            foreach (Sections section in zoo.Zooo)
+            {
+                inSection = (from mam in section.Animals where mam.Name.Contains("Млекопитающее") select mam).Count<IAnimal>();
+                Console.WriteLine($"В секции {sectionNumber} млекопитающих: {inSection}");
+                sectionNumber++;
+                inZoo += inSection;
+            }
+            Console.WriteLine($"Млекопитающих в зоопарке: {inZoo}");
+            
+        }
+        private static void SetOperations_3()
+        {
+
         }
 
     }

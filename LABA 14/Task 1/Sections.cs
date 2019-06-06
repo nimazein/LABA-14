@@ -10,6 +10,13 @@ namespace Task_1
     {
         private List<IAnimal> animals = new List<IAnimal>();
         
+        public List<IAnimal> Animals
+        {
+            get
+            {
+                return animals;
+            }
+        }
         public int Count { get { return animals.Count; } }
 
         public void Add(IAnimal item)
