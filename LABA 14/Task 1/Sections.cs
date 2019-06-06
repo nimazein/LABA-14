@@ -12,6 +12,7 @@ namespace Task_1
         
         public List<IAnimal> Animals
         {
+            
             get
             {
                 return animals;
@@ -23,7 +24,10 @@ namespace Task_1
         {
             animals.Add(item);
         }
-
+        public IAnimal[] ToArray()
+        {
+            return animals.ToArray();
+        }
 
     }
 }

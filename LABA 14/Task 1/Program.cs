@@ -32,13 +32,18 @@ namespace Task_1
             Console.Clear();
 
 
-            Console.WriteLine("Запрос 3: операции над множествами");
+            Console.WriteLine("Запрос 3: операции над множествами (секция 1 и 2)");
             Console.WriteLine();
             SetOperations_3();
             Console.ReadKey();
             Console.Clear();
 
+            Console.WriteLine("Запрос 4: агрегирование данных");
+            Console.WriteLine();
+            AgregateData_4();
             Console.ReadKey();
+            Console.Clear();
+            
         }
         private static void FillCollections()
         {
@@ -126,8 +131,68 @@ namespace Task_1
         }
         private static void SetOperations_3()
         {
+            IAnimal[] collection_1 = zoo.Zooo[0].ToArray();
+            IAnimal[] collection_2 = zoo.Zooo[1].ToArray();
 
+            Console.WriteLine("Пересечение множеств");
+            Console.WriteLine();
+            Intersect(collection_1, collection_2);
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.WriteLine("Объединение множеств");
+            Console.WriteLine();
+            Union(collection_1, collection_2);
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.WriteLine("Разность множеств");
+            Console.WriteLine();
+            Except(collection_1, collection_2);
+            Console.ReadKey();
+            Console.Clear();       
         }
+        private static void Intersect(IAnimal[] collection_1, IAnimal[] collection_2)
+        {
+            var intersection = collection_1.Intersect(collection_2);
+            foreach (IAnimal animal in intersection)
+            {
+                Console.WriteLine(animal.ToString());
+            }
+        }
+        private static void Union(IAnimal[] collection_1, IAnimal[] collection_2)
+        {
+            var union = collection_1.Union(collection_2);
+            foreach (IAnimal animal in union)
+            {
+                Console.WriteLine(animal.ToString());
+            }
+        }
+        private static void Except(IAnimal[] collection_1, IAnimal[] collection_2)
+        {
+            var except = collection_1.Except(collection_2);
+            foreach (IAnimal animal in except)
+            {
+                Console.WriteLine(animal.ToString());
+            }
+        }
+        private static void AgregateData_4()
+        {
+            int numberInZoo = 0;
+            int sectionNumber = 1;
+            int weightSumInZoo = 0;
+            foreach (Sections section in zoo.Zooo)
+            {
+                int weightSumInSection = (from animal in section.Animals where animal.Name.Contains("Млекопитающее") select animal.Weight).Sum();
+                int numberInSection = (from mam in section.Animals where mam.Name.Contains("Млекопитающее") select mam).Count<IAnimal>();
 
+                Console.WriteLine($"Средний вес млекопитающих в секции {sectionNumber}: {weightSumInSection/numberInSection}");
+                sectionNumber++;
+                numberInZoo += numberInSection;
+                weightSumInZoo += weightSumInSection;
+
+            }
+            Console.WriteLine($"Средний вес млекопитающих в зоопарке: {weightSumInZoo / numberInZoo}");
+        }
     }
 }
